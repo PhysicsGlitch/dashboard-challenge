@@ -38,13 +38,6 @@ var sample_set = data.samples;
 
 var metadata_set = data.metadata;
     console.log(metadata_set);
-    
-
-// The next task is connect the selected drop down value to use it as reference in the rest of the code to get the appropriate data.
-// A thing to notice in the data set is that they are all indexed in the same way by id. So simply getting the index value can be a useful way to 
-// get the needed data.
-    
-
 
 // function to sort by top 10 sample_values     
 
@@ -63,23 +56,40 @@ var bar_data = [{
 
 Plotly.newPlot('bar', bar_data);
 
-
-// Figure out how to sort metadata_set by index. 
     
 // Panel Display 
+// To get the panel display I had to go through a few steps. d3 select can't accept a dictonary, but will take an array.
+// so I tooke my metadat dictionary and then converted it into a properly formatted array with the format 'key: value'
+// I then ran a for loop that pushed each key, value pair into an array
+// Then I was able to use d3 to select my <p> elements. (The only p's in my index.html were the panel body)
+// d3 then inserts the properly formatted metadata info into the final index.html file
+    
     
 var id_data = metadata_set[test_index];
     console.log(id_data);
 
-var panel_body = document.getElementById("sample-metadata");
-panel_body.innertHTML = "";
-panel_body.innerHTML += "ID: " + metadata_set[test_index].id + "\n";
-panel_body.innerHTML += "Ethnicity: " + metadata_set[test_index].ethnicity + "\n";
-panel_body.innerHTML += "Gender: " + metadata_set[test_index].gender + "\n";
-panel_body.innerHTML += "Age: " + metadata_set[test_index].age + "\n";
-panel_body.innerHTML += "Location: " + metadata_set[test_index].location + "\n";
-panel_body.innerHTML += "bbtype: " + metadata_set[test_index].bbtype + "\n";
-panel_body.innerHTML += "wfreq: " + metadata_set[test_index].wfreq;
+var id_data_formatted =  [];
+
+for (const [key, value] of Object.entries(id_data)) {
+     id_data_formatted.push(`${key}: ${value}`);
+    };
+    
+var id_array = Object.entries(id_data);
+    console.log(id_data);
+
+d3.select("body")
+        .selectAll("p")
+        .data(id_data_formatted)
+        .text(
+    function (d) {
+              return d;
+        });
+    
+    
+//(`${key}: ${value}`)
+// Plotly.newPlot('sample-metadata', id_data); 
+// var panel_text = 
+
 
 // bubble chart values
 
