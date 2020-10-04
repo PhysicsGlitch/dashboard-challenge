@@ -112,10 +112,10 @@ var trace1 = {
 var bubble_data = [trace1];
 
 var bubble_layout = {
-  title: 'Marker Size',
+  title: 'Sample Size',
   showlegend: false,
-  height: 600,
-  width: 600
+  height: 800,
+  width: 1400
 };
 
 Plotly.newPlot('bubble', bubble_data, bubble_layout);
@@ -131,10 +131,9 @@ Plotly.newPlot('bubble', bubble_data, bubble_layout);
     
 
     
-//Plotly.newPlot('gauge', gauge_data);
 
     
-// Enter a speed between 0 and 180
+// This just stores the wfreq value as a variable to input into the code
 var wash_freq = metadata_set[test_index].wfreq;
     console.log(wash_freq);
 
@@ -157,16 +156,48 @@ var mainPath = path1,
      pathEnd = ' Z';
 var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
-var gauge_data = [{ type: 'scatter',
-   x: [0], y:[0],
-    marker: {size: 14, color:'850000'},
-    showlegend: false,
-    name: 'speed',
-    text: wash_freq,
-    hoverinfo: 'text+name'},
-  { values: [0,1,2,3,4,5,6,7,8,9,10,4],
+var gauge_data = [{
+  values: [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    180
+  ],
   rotation: 90,
-  text: ["9-10",
+  text: [
+     "8-9",
+    "7-8",
+    "6-7",
+    "5-6",
+    "4-5",
+    "3-4",
+    "2-3",
+    "1-2",
+    "0-1",
+    ""
+  ],
+  textinfo: "text",
+  textposition: "inside",
+  marker: {
+    colors: [
+      "rgba(14, 127, 0, .5)",
+      "rgba(110, 154, 22, .5)",
+      "rgba(170, 202, 42, .5)",
+      "rgba(202, 209, 95, .5)",
+      "rgba(210, 206, 145, .5)",
+      "rgba(202, 209, 95, .5)",
+      "rgba(210, 206, 145, .5)",
+      "rgba(232, 226, 202, .5)",
+      "rgba(255, 255, 255, 0)"
+    ]
+  },
+  labels: [
     "8-9",
     "7-8",
     "6-7",
@@ -174,28 +205,17 @@ var gauge_data = [{ type: 'scatter',
     "4-5",
     "3-4",
     "2-3",
+    "1-2",
     "0-1",
-    ''],
-  textinfo: 'text',
-  textposition:'inside',
-  marker: {colors:[
-      "rgba(14, 127, 0, .5)",
-      "rgba(110, 154, 22, .5)",
-      "rgba(170, 202, 42, .5)",
-      "rgba(170, 202, 42, .5)",
-      "rgba(170, 202, 42, .5)",
-      "rgba(202, 209, 95, .5)",
-      "rgba(210, 206, 145, .5)",
-      "rgba(232, 226, 202, .5)",
-      "rgba(255, 255, 255, 0)"
-    ]},
-  hoverinfo: 'label',
+    ""
+  ],
+  hoverinfo: "label",
   hole: .5,
-  type: 'pie',
+  type: "pie",
   showlegend: false
 }];
 
-var layout = {
+var gauge_layout = {
   shapes:[{
       type: 'path',
       path: path,
@@ -214,7 +234,7 @@ var layout = {
 
 
 
-Plotly.newPlot('gauge', gauge_data);
+Plotly.newPlot('gauge', gauge_data, gauge_layout);
     
 });
 
